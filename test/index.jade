@@ -1,0 +1,30 @@
+extends ./layout
+
+block content
+  p Here is some content
+  p( style="color: blue;") Click anywhere to activate the modal window.
+
+  p This example is cool because it demonstrates how a modal can be animated to display:none;
+  p I was going to to a quick example of how handy this would bw animate an accordian from max-height 0 to max-height none, but my onStart() function isn't in quite the right spot. 
+
+  h1 Modal Test
+  a#modal-test-button Click here to activate the modal.
+
+  h1 Modal Test 2
+  a#modal2-test-button Click here to activate the modal.
+
+  br
+  br
+  .accordion#accordion
+    #accordion-header.accordion__header Accordion Header
+    .accordion__body
+      | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.
+
+
+  #modal-test.modal.is-hidden
+    p This is the modal
+
+  #modal2-test.modal.is-hidden
+    p This is the second modal
+
+

@@ -1,0 +1,81 @@
+/* ---------------------------------------------------------------------------
+
+	Application
+	===========
+
+--------------------------------------------------------------------------- */
+
+
+// Dependencies
+@import "../node_modules/toolkit-less-css/toolkit.less";
+
+
+
+.modal {
+	position: fixed;
+	top: -50%;
+	right: -50%;
+	bottom: -50%;
+	left: -50%;
+	background+: url(http://fc03.deviantart.net/fs49/f/2009/205/e/4/FREE_CAT_PNG_by_AbsurdWordPreferred.png) center center / 33% auto no-repeat;
+	background+: linear-gradient(90deg, #d53369 33%, #cbad6d 67%);
+	background+: #000;
+
+	color: #FFF;
+	text-align: center;
+
+	p {
+		max-width: 300px;
+		height: 8em;
+		border: 10px solid;
+		padding: 3em;
+		margin: auto;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		text-transform: uppercase;
+	}
+}
+
+.modal.is-animating {
+	transition+: opacity 0.5s ease-out 0.2s;
+	transition+: transform 1s ease-out;
+	transition+: top 1100ms ease-out;
+	display: block !important;
+}
+
+.modal.is-hidden {
+	display: none;
+	opacity: 0;
+	transform+_: scale(1.5);
+	transform+_: rotate(180deg);
+}
+
+
+
+
+.accordion {
+
+	&__header {
+		border: 1px solid #eee;
+		padding: 3px;
+	}
+
+	&__body {
+		overflow: hidden;
+		height: 0px;
+		padding: 0px;
+		border-bottom: 1px solid #eee;
+	}
+}
+
+.accordion.is-animating .accordion__body {
+	transition: height 0.5s ease;
+}
+
+.accordion.is-open .accordion__body {
+	height: auto;
+}
+

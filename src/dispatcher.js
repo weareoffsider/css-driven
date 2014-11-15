@@ -1,4 +1,4 @@
-var _ = require("lodash");
+var utils = require("./utils.js");
 
 var currentFrame = 0;
 var baseTimestamp = +new Date();
@@ -37,12 +37,12 @@ var loopDispatcher = function(timestamp) {
 };
 
 var resortFrames = function() {
-  frames = _.uniq(frames)
+  frames = utils.arrayToSet(frames)
   frames.sort(function(a, b) { return a - b; })
 };
 
 var resortTimestamps = function() {
-  timestamps = _.uniq(timestamps)
+  timestamps = utils.arrayToSet(timestamps)
   timestamps.sort(function(a, b) { return a - b; }) 
 }
 

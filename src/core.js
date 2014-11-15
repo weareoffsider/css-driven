@@ -1,16 +1,11 @@
 var utils = require("./utils.js");
 var dispatcher = require("./dispatcher.js");
-var _ = require("lodash");
-
-
-
 
 var executeStep = function($el, stepInstructions, animData) {
   if (!Array.isArray(stepInstructions)) {
     stepInstructions = [stepInstructions];
   }
 
-  console.log($el, stepInstructions);
   stepInstructions.forEach(function(step) {
     if (typeof step == "string") {
       // CLASS ADD, TOGGLE OR REMOVE
@@ -38,13 +33,17 @@ var verbMap = {
 };
 
 var doTransition = function($el, instructions) {
-  var process = _.clone(instructions);
+  var process = {}
+  Object.keys(instructions).forEach(function(key) {
+    process[key] = instructions[key];
+  });
+    
   var animData = {state: null};
 
   var timingElem = process["timing"] || $el;
   if (process["timing"]) delete process["timing"];
   
-  _.keys(verbMap).forEach(function(verb) {
+  Object.keys(verbMap).forEach(function(verb) {
     var procInst = process[verb]
     if (procInst) {
       if (!process[verbMap[verb]]) { process[verbMap[verb]] = []; }
@@ -59,10 +58,11 @@ var doTransition = function($el, instructions) {
     delete process["0"];
   }
 
-
   var timeSpan = utils.getLongestTransitionOrAnimationTime(timingElem);
 
-  _.forOwn(process, function(stepInstructions, point) {
+  Object.keys(process).forEach(function(point) {
+    var stepInstructions = process[point];
+
     if (point.slice(-1) == "%") {
       var timestamp = parseInt(point) / 100 * timeSpan;
       dispatcher.scheduleTimestamp(

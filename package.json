@@ -2,7 +2,7 @@
   "name": "css-driven",
   "version": "0.0.0",
   "description": "CSS Driven Transitions and Animations Library",
-  "main": "index.js",
+  "main": "dist/css-driven.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,14 +16,12 @@
     "gulp-jade": "~0.9.0",
     "gulp-concat": "~2.4.1",
     "gutil": "~1.5.5",
-    "toolkit-less-css": "0.0.1",
+    "toolkit-less-css": "~0.0.2",
     "gulp-browserify": "~0.5.0",
     "gulp-pixrem": "~0.1.1",
     "gulp-util": "~3.0.1",
     "gulp-rename": "~1.2.0",
-    "gulp-connect": "~2.2.0"
-  },
-  "dependencies": {
-    "lodash": "~2.4.1"
+    "gulp-connect": "~2.2.0",
+    "gulp-uglifyjs": "~0.5.0"
   }
 }

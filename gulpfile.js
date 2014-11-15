@@ -8,6 +8,7 @@ var gulp         = require('gulp'),
     rename       = require('gulp-rename'),
     connect      = require('gulp-connect'),
     browserify   = require('gulp-browserify'),
+    uglify       = require('gulp-uglifyjs'),
     gutil        = require('gulp-util');
 
 
@@ -21,6 +22,7 @@ var PATHS = {
   "testOut": "./tmp/test",
   "src": "./src",
   "srcOut": "./tmp/build",
+  "distOut": "./dist",
 };
 
 
@@ -32,10 +34,22 @@ gulp.task("scripts", function() {
       }))
       .pipe(rename("css-driven.js"))
       .pipe(gulp.dest(PATHS.srcOut))
+      .pipe(gulp.dest(PATHS.distOut))
       .pipe(gulp.dest(PATHS.testOut))
       .pipe(connect.reload());
 });
 
+
+
+// BUILD TASKS
+gulp.task("build", ["scripts"], function() {
+  gulp.src(PATHS.srcOut + "/css-driven.js")
+      .pipe(uglify())
+      .pipe(rename("css-driven.min.js"))
+      .pipe(gulp.dest(PATHS.distOut))
+      .pipe(gulp.dest(PATHS.testOut))
+      .pipe(connect.reload());
+});
 
 
 
@@ -76,7 +90,7 @@ gulp.task('test:clean', function() {
 gulp.task('test', function() {
   gulp.watch(PATHS.test + '/**/*.less', ['test:less']);
   gulp.watch(PATHS.test + '/**/*.js', ['test:js']);
-  gulp.watch(PATHS.src + '/**/*.js', ['scripts']);
+  gulp.watch(PATHS.src + '/**/*.js', ['build']);
   gulp.watch(PATHS.test + '/**/*.jade', ['test:jade']);
 
   connect.server({

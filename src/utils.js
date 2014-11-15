@@ -41,3 +41,15 @@ var getLongestTransitionOrAnimationTime = function( el ){
 }
 
 module.exports.getLongestTransitionOrAnimationTime = getLongestTransitionOrAnimationTime;
+
+
+var arrayToSet = function(array) {
+  return array.reduce(function(set, item) {
+    if (set.indexOf(item) == -1) {
+      set.push(item);
+    };
+    return set;
+  }, []);
+};
+
+module.exports.arrayToSet = arrayToSet;

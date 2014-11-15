@@ -9,6 +9,7 @@ var gulp         = require('gulp'),
     connect      = require('gulp-connect'),
     browserify   = require('gulp-browserify'),
     uglify       = require('gulp-uglifyjs'),
+    envify       = require('envify/custom'),
     gutil        = require('gulp-util');
 
 
@@ -31,6 +32,11 @@ gulp.task("scripts", function() {
   gulp.src(PATHS.src + "/main.js")
       .pipe(browserify({
         debug: true
+      })
+      .on('prebundle', function(bundle) {
+        bundle.transform(envify({
+          NODE_ENV: "development"
+        }));
       }))
       .pipe(rename("css-driven.js"))
       .pipe(gulp.dest(PATHS.srcOut))
@@ -42,8 +48,16 @@ gulp.task("scripts", function() {
 
 
 // BUILD TASKS
-gulp.task("build", ["scripts"], function() {
-  gulp.src(PATHS.srcOut + "/css-driven.js")
+gulp.task("build", function() {
+  gulp.src(PATHS.src + "/main.js")
+      .pipe(browserify({
+        ignore: "debug.js"
+      })
+      .on('prebundle', function(bundle) {
+        bundle.transform(envify({
+          NODE_ENV: "production"
+        }));
+      }))
       .pipe(uglify())
       .pipe(rename("css-driven.min.js"))
       .pipe(gulp.dest(PATHS.distOut))
@@ -90,7 +104,7 @@ gulp.task('test:clean', function() {
 gulp.task('test', function() {
   gulp.watch(PATHS.test + '/**/*.less', ['test:less']);
   gulp.watch(PATHS.test + '/**/*.js', ['test:js']);
-  gulp.watch(PATHS.src + '/**/*.js', ['build']);
+  gulp.watch(PATHS.src + '/**/*.js', ['scripts']);
   gulp.watch(PATHS.test + '/**/*.jade', ['test:jade']);
 
   connect.server({

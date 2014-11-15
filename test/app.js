@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+CSSDriven.debugMode(true);
+
 var modal = document.getElementById("modal-test");
 var toggleModal = function() {
   CSSDriven.doTransition(modal, {
     "setup": "+is-animating",
     "trigger": "~is-hidden",
     "end": "-is-animating"
+  }, {
+    "name": "funky-modal"
   })
 };
 
@@ -19,7 +23,7 @@ var toggleModal2 = function() {
     "0": "+is-animating",
     "1": "~is-hidden",
     "100%": "-is-animating"
-  })
+  });
 };
 
 document.getElementById("modal2-test-button").addEventListener("click", toggleModal2);
@@ -45,7 +49,6 @@ accordionToggle.addEventListener("click", function() {
       return targetHeight;
 
     }, "+is-animating"],
-    "timing": accordion.querySelector(".accordion__body"),
     "trigger": function($el, state) {
       $el.querySelector(".accordion__body").style.height = state + "px";
     },
@@ -53,6 +56,9 @@ accordionToggle.addEventListener("click", function() {
       $el.querySelector(".accordion__body").style.height = null;
       $el.classList.toggle("is-open");
     }, "-is-animating"]
+  }, {
+    "name": "accordion",
+    "timingElement": accordion.querySelector(".accordion__body"),
   });
 
 });

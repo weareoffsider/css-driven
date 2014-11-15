@@ -1,16 +1,19 @@
+var compat = require("./compat.js");
+var requestAnimationFrame = compat.requestAnimationFrame;
+
 var jumpAnimationFrame = function(fn, frames) {
   frames = frames || 1;
   var iteration = 0;
   var jumper = function() {
     iteration += 1;
     if (iteration >= frames) {
-      window.requestAnimationFrame(fn);
+      requestAnimationFrame(fn);
     } else {
-      window.requestAnimationFrame(jumper);
+      requestAnimationFrame(jumper);
     }
   }
 
-  window.requestAnimationFrame(jumper);
+  requestAnimationFrame(jumper);
 }
 
 module.exports.jumpAnimationFrame = jumpAnimationFrame;
@@ -24,9 +27,9 @@ var getLongestTransitionOrAnimationTime = function( el ){
 
     var delay, duration, subTotals;
 
-    delay = getComputedStyle( el )[Modernizr.prefixed(cssType + "Delay")]
+    delay = getComputedStyle( el )[compat.prefixed(cssType + "Delay")]
     delay = delay.split(',').map(parseFloat);
-    duration = getComputedStyle( el )[Modernizr.prefixed(cssType + "Duration")]
+    duration = getComputedStyle( el )[compat.prefixed(cssType + "Duration")]
     duration = duration.split(',').map(parseFloat);
   
     subTotals = delay.map(function(d, ix) { return d + duration[ix] });

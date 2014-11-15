@@ -1,4 +1,5 @@
 var utils = require("./utils.js");
+var compat = require("./compat.js");
 
 var currentFrame = 0;
 var baseTimestamp = +new Date();
@@ -7,6 +8,8 @@ var registry = {};
 var frames = [];
 var timestamps = [];
 var running = false;
+
+var requestAnimationFrame = compat.requestAnimationFrame;
 
 var loopDispatcher = function(timestamp) {
   currentFrame++;

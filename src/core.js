@@ -52,9 +52,9 @@ if (process.env.NODE_ENV === "development") {
 
 var doTransition = function($el, instructions, options) {
   options = options || {};
-  var process = {}
+  var processed = {}
   Object.keys(instructions).forEach(function(key) {
-    process[key] = instructions[key];
+    processed[key] = instructions[key];
   });
     
   var animData = {state: null};
@@ -65,28 +65,28 @@ var doTransition = function($el, instructions, options) {
   var timingElem = options["timingElement"] || $el;
   
   Object.keys(verbMap).forEach(function(verb) {
-    var procInst = process[verb]
+    var procInst = processed[verb]
     if (procInst) {
-      if (!process[verbMap[verb]]) { process[verbMap[verb]] = []; }
+      if (!processed[verbMap[verb]]) { processed[verbMap[verb]] = []; }
       if (!Array.isArray(procInst)) { procInst = [procInst]; }
-      process[verbMap[verb]] = process[verbMap[verb]].concat(procInst);
-      delete process[verb];
+      processed[verbMap[verb]] = processed[verbMap[verb]].concat(procInst);
+      delete processed[verb];
     }
   });
 
-  if (process["0"]) {
-    executeStep($el, "0", process["0"], animData);
-    delete process["0"];
+  if (processed["0"]) {
+    executeStep($el, "0", processed["0"], animData);
+    delete processed["0"];
   }
 
   if (process.env.NODE_ENV === "development") {
     if (debug.inFallbackMode()) {
-      return doFallback($el, process, animData, options);
+      return doFallback($el, processed, animData, options);
     }
   }
 
   if (!compat.requestAnimationFrame) {
-    return doFallback($el, process, animData, options);
+    return doFallback($el, processed, animData, options);
   }
 
   var timeSpan = utils.getLongestTransitionOrAnimationTime(timingElem);
@@ -94,8 +94,8 @@ var doTransition = function($el, instructions, options) {
     debug.logger(animData.name + " :: Animating for " + timeSpan + "ms");
   }
 
-  Object.keys(process).forEach(function(point) {
-    var stepInstructions = process[point];
+  Object.keys(processed).forEach(function(point) {
+    var stepInstructions = processed[point];
 
     if (point.slice(-1) == "%") {
       var timestamp = parseInt(point) / 100 * timeSpan;
@@ -125,7 +125,7 @@ var getUnitPriority = function(point) {
 
 };
 
-var doFallback = function($el, process, animData, options) {
+var doFallback = function($el, processed, animData, options) {
   if (process.env.NODE_ENV === "development") {
     debug.logger(animData.name + " :: Using fallback");
   }
@@ -133,7 +133,7 @@ var doFallback = function($el, process, animData, options) {
   if (options.fallback) {
     options.fallback($el);
   } else {
-    var processKeys = Object.keys(process).sort(function(a, b) {
+    var processKeys = Object.keys(processed).sort(function(a, b) {
       var unitPriorityA = getUnitPriority(a);
       var unitPriorityB = getUnitPriority(b);
       if (unitPriorityA != unitPriorityB) {
@@ -144,7 +144,7 @@ var doFallback = function($el, process, animData, options) {
     });
 
     processKeys.forEach(function(key) {
-      executeStep.call($el, $el, key, process[key], animData);
+      executeStep.call($el, $el, key, processed[key], animData);
     });
   }
 };

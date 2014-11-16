@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.0.4 - 2014-11-17
+### Fixed
+- removed shadowing of process variable in doTransition, fixed for real on
+  browserify when developing unminified.
+
 ## 0.0.3 - 2014-11-16
 ### Fixed
 - still incorrectly configured entry point for browserify (it's amateur hour)

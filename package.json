@@ -1,6 +1,6 @@
 {
   "name": "css-driven",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "CSS Driven Transitions and Animations Library",
   "main": "dist/css-driven.js",
   "scripts": {

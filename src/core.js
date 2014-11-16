@@ -31,6 +31,10 @@ var executeStep = function($el, point, stepInstructions, animData) {
 
     } else if (typeof step == "function") {
       animData.state = step($el, animData.state);
+    } else if (typeof step == "object") {
+      Object.keys(step).forEach(function(key) {
+        $el.style[key] = step[key];
+      });
     }
   });
 };

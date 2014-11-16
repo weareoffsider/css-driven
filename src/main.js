@@ -17,3 +17,4 @@ if (process.env.NODE_ENV === "development") {
 
 
 window.CSSDriven = CSSDriven;
+module.exports = CSSDriven;

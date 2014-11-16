@@ -9,6 +9,18 @@ var CSSDriven = {
   doTransition: core.doTransition,
 };
 
+// passovers for if developers leave debug mode on when deploying
+var minifiedEnvWarning = function(funcName) {
+  return function() {
+    console.warn("css-driven :: " + funcName + " is not available in a " +
+                 "minified environment");
+  }
+}
+
+CSSDriven.debugMode = minifiedEnvWarning("debugMode");
+CSSDriven.fallbackMode = minifiedEnvWarning("fallbackMode");
+
+
 if (process.env.NODE_ENV === "development") {
   CSSDriven.debugMode = debug.set;
   CSSDriven.fallbackMode = debug.fallbackMode;

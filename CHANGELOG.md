@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.0.5 - 2014-11-17
+### Changed
+- debugMode and fallbackMode warning provided if attempting to use in
+  minified build
+
 ## 0.0.4 - 2014-11-17
 ### Fixed
 - removed shadowing of process variable in doTransition, fixed for real on

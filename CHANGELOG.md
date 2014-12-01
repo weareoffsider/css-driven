@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.0.6 - 2014-12-02
+### Changed
+- inverted environment tests to !== "production", so browserify users will get
+  the non minified version by the default
+
 ## 0.0.5 - 2014-11-17
 ### Changed
 - debugMode and fallbackMode warning provided if attempting to use in

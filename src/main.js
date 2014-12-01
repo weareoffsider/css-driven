@@ -1,7 +1,7 @@
 var utils = require("./utils.js");
 var core = require("./core.js");
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "production") {
   var debug = require("./debug.js");
 }
 
@@ -20,8 +20,7 @@ var minifiedEnvWarning = function(funcName) {
 CSSDriven.debugMode = minifiedEnvWarning("debugMode");
 CSSDriven.fallbackMode = minifiedEnvWarning("fallbackMode");
 
-
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "production") {
   CSSDriven.debugMode = debug.set;
   CSSDriven.fallbackMode = debug.fallbackMode;
 }

@@ -2,7 +2,7 @@ var utils = require("./utils.js");
 var dispatcher = require("./dispatcher.js");
 var compat = require("./compat.js");
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "production") {
   var debug = require("./debug.js");
 }
 
@@ -11,7 +11,7 @@ var executeStep = function($el, point, stepInstructions, animData) {
     stepInstructions = [stepInstructions];
   }
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     debug.logger(animData.name + " :: " + point + " - " +
                  JSON.stringify(animData.state));
   }
@@ -46,7 +46,7 @@ var verbMap = {
   "cleanup": "100%",
 };
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "production") {
   var animNameIncrement = 0;
 }
 
@@ -58,7 +58,7 @@ var doTransition = function($el, instructions, options) {
   });
     
   var animData = {state: null};
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     animData.name = options["name"] || "anim" + animNameIncrement++;
   }
 
@@ -79,7 +79,7 @@ var doTransition = function($el, instructions, options) {
     delete processed["0"];
   }
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     if (debug.inFallbackMode()) {
       return doFallback($el, processed, animData, options);
     }
@@ -90,7 +90,7 @@ var doTransition = function($el, instructions, options) {
   }
 
   var timeSpan = utils.getLongestTransitionOrAnimationTime(timingElem);
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     debug.logger(animData.name + " :: Animating for " + timeSpan + "ms");
   }
 
@@ -126,7 +126,7 @@ var getUnitPriority = function(point) {
 };
 
 var doFallback = function($el, processed, animData, options) {
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     debug.logger(animData.name + " :: Using fallback");
   }
 

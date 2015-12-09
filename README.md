@@ -144,6 +144,7 @@ the following for the css-driven to run in older browsers (IE8/9).
 - (Array.forEach)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Polyfill]
 - (Element.classList)[https://developer.mozilla.org/en/docs/Web/API/Element/classList#JavaScript_shim_for_other_implementations]
 - (Array.isArray)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray#Polyfill]
+- (console.log)[https://github.com/paulmillr/console-polyfill] - only if you wish to use CSSDriven.debugMode() or CSSDriven.fallbackMode() debug inside IE8
 
 ## Method Reference
 

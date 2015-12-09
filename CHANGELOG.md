@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.1.0 - 2015-12-09
+### Changed
+- fallback mode now runs by default if browser is not capable of request
+  animation frame or css transitions
+
 ## 0.0.6 - 2014-12-02
 ### Changed
 - inverted environment tests to !== "production", so browserify users will get

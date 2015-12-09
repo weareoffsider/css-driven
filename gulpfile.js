@@ -48,7 +48,7 @@ gulp.task("scripts", function() {
 
 
 // BUILD TASKS
-gulp.task("build", function() {
+gulp.task("build", ["scripts"], function() {
   gulp.src(PATHS.src + "/main.js")
       .pipe(browserify({
         ignore: "debug.js"

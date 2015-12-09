@@ -56,14 +56,14 @@ var doTransition = function($el, instructions, options) {
   Object.keys(instructions).forEach(function(key) {
     processed[key] = instructions[key];
   });
-    
+
   var animData = {state: null};
   if (process.env.NODE_ENV !== "production") {
     animData.name = options["name"] || "anim" + animNameIncrement++;
   }
 
   var timingElem = options["timingElement"] || $el;
-  
+
   Object.keys(verbMap).forEach(function(verb) {
     var procInst = processed[verb]
     if (procInst) {
@@ -85,7 +85,7 @@ var doTransition = function($el, instructions, options) {
     }
   }
 
-  if (!compat.requestAnimationFrame) {
+  if (!compat.requestAnimationFrame || !compat.cssTransition) {
     return doFallback($el, processed, animData, options);
   }
 

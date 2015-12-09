@@ -31,7 +31,7 @@ var getLongestTransitionOrAnimationTime = function( el ){
     delay = delay.split(',').map(parseFloat);
     duration = getComputedStyle( el )[compat.prefixed(cssType + "Duration")]
     duration = duration.split(',').map(parseFloat);
-  
+
     subTotals = delay.map(function(d, ix) { return d + duration[ix] });
     return totals.concat(subTotals);
 

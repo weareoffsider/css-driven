@@ -53,7 +53,7 @@ var Modernizr = (function( window, document, undefined ) {
       };
     }
     else {
-      hasOwnProp = function (object, property) { 
+      hasOwnProp = function (object, property) {
         return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
       };
     }
@@ -165,7 +165,19 @@ var Modernizr = (function( window, document, undefined ) {
         }
     }
 
+    tests['csstransitions'] = function() {
+        return testPropsAll('transition');
+    };
 
+    for ( var feature in tests ) {
+        if ( hasOwnProp(tests, feature) ) {
+            // run the test, throw the return value into the Modernizr,
+            //   then based on that boolean, define an appropriate className
+            //   and push it into an array of classes we'll join later.
+            featureName  = feature.toLowerCase();
+            Modernizr[featureName] = tests[feature]();
+        }
+    }
 
      Modernizr.addTest = function ( feature, test ) {
        if ( typeof feature == 'object' ) {
@@ -191,7 +203,7 @@ var Modernizr = (function( window, document, undefined ) {
 
        }
 
-       return Modernizr; 
+       return Modernizr;
      };
 
 
@@ -244,6 +256,7 @@ if (!requestAnimationFrame) {
   cancelAnimationFrame = window.cancelAnimationFrame;
 }
 
+module.exports.cssTransition = Modernizr.csstransitions;
 module.exports.requestAnimationFrame = requestAnimationFrame;
 module.exports.cancelAnimationFrame = cancelAnimationFrame;
 module.exports.prefixed = function(prop, obj, elem) {

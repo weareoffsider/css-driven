@@ -56,7 +56,7 @@ In this example, we have a funky modal we want to animate in with some excessive
 effects. We want to make sure the animation is timed based on the transition
 that will take the longest, in this case it's the transformation.
 
-On calling doTransition, CSSDriven will: 
+On calling doTransition, CSSDriven will:
 
 - Run the "setup" instruction - add the class `is-animating`
 - Measure all transition and animation durations + delays to find the longest
@@ -129,6 +129,22 @@ Because the transition doesn't actually occur on the accordion where we're
 changing the classes, we've added an option at the end, `"timingElement"` lets
 us set a different element to measure the transition/animation timing on.
 
+## Browser Support
+
+css-driven aims to technically support IE8+ - but perform best in modern
+browsers. Obviously browsers that do not support CSS transitions cannot transition
+so this is detected we fallback to run each of the steps in sequence which more
+often than not is more than acceptable.
+
+### IE8/9 required polyfills
+We do use some more modern Javscript features so you will need to polyfill
+the following for the css-driven to run in older browsers (IE8/9).
+
+- (Object.keys)[https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Polyfill]
+- (Array.forEach)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Polyfill]
+- (Element.classList)[https://developer.mozilla.org/en/docs/Web/API/Element/classList#JavaScript_shim_for_other_implementations]
+- (Array.isArray)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray#Polyfill]
+
 ## Method Reference
 
 ### doTransition(domElement, instructions, options)
@@ -158,7 +174,8 @@ _not available in minified version_
 
 Set the fallback mode to be true or false. When in fallback mode, CSS Driven
 will always act as if requestAnimationFrame is not available, and run either
-your fallback function, or all the steps in sequence synchronously.
+your fallback function, or all the steps in sequence synchronously. Useful so you
+can write your doTransition fallback functions in modern browsers.
 
 
 ## License

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.1.1 - 2016-02-23
+### Fixed
+- add offsetHeight hit to pop layout refreshes on class changes, so the
+  setup phase can avoid merging css changes that shouldn't occur, such
+  as a layout class then also animating
+
 ## 0.1.0 - 2015-12-09
 ### Changed
 - fallback mode now runs by default if browser is not capable of request

@@ -23,9 +23,9 @@ var executeStep = function($el, point, stepInstructions, animData) {
       var className = step.slice(1);
 
       switch (modifier) {
-      case "+": $el.classList.add(className); break;
-      case "-": $el.classList.remove(className); break;
-      case "~": $el.classList.toggle(className); break;
+      case "+": $el.classList.add(className); $el.offsetHeight; break;
+      case "-": $el.classList.remove(className); $el.offsetHeight; break;
+      case "~": $el.classList.toggle(className); $el.offsetHeight; break;
       default: throw new Error("Class must be prefixed with '+', '-', or '~'");
       };
 

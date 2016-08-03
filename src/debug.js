@@ -15,8 +15,8 @@ var fallbackMode = function(active) {
 module.exports.fallbackMode = fallbackMode;
 module.exports.inFallbackMode = function() { return inFallbackMode };
 
-var logger = function(string) {
+var logger = function(string, element) {
   if (!inDebugMode) return;
-  console.log("css-driven :: " + string);
+  console.log("css-driven :: " + string, element);
 };
 module.exports.logger = logger;

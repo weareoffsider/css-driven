@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.2.0 - 2016-08-03
+### Changed
+- add log out of targeted element in debugging
+
 ## 0.1.1 - 2016-02-23
 ### Fixed
 - add offsetHeight hit to pop layout refreshes on class changes, so the

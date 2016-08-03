@@ -13,7 +13,7 @@ var executeStep = function($el, point, stepInstructions, animData) {
 
   if (process.env.NODE_ENV !== "production") {
     debug.logger(animData.name + " :: " + point + " - " +
-                 JSON.stringify(animData.state));
+                 JSON.stringify(animData.state), $el);
   }
 
   stepInstructions.forEach(function(step) {

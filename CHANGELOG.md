@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased Changes
 
+## 0.2.1 - 2017-01-04
+### Fixed
+- pass over window related statements when imported on node server (for save
+  server side renders where conditional imports not an option)
+
 ## 0.2.0 - 2016-08-03
 ### Changed
 - add log out of targeted element in debugging

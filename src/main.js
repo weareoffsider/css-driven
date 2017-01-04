@@ -27,5 +27,7 @@ if (process.env.NODE_ENV !== "production") {
 
 
 
-window.CSSDriven = CSSDriven;
+if (typeof window !== 'undefined') {
+  window.CSSDriven = CSSDriven;
+}
 module.exports = CSSDriven;
